@@ -1,9 +1,8 @@
 const fs = require("fs");
 var inquirer = require('inquirer');
-const generateMarkdown = require("./generateMarkdown");
-const path = require("path");
-function init(){
-inquirer.prompt([
+const generateMarkdown = require("./generateMarkdown")
+const path = require("path")
+const questions = [
   {
     type: "input",
     name:"title",
@@ -55,26 +54,20 @@ inquirer.prompt([
     name:"test",
     message:"What testing was done?",
   },
-]).then((data) =>{
-const fileName = `${data.title}.md`;
+];
 
-fs.writeFile(fileName, generateMarkdown(data)),(err)=>{
-  if (err) {
-    return console.log(err);}
-    console.log("file created")
-}})};
 // TODO: Create a function to write README file
-// function writeFile(fileName, generateMarkdown(data)) {
-//   return fs.writeFileSync(path.join(process.cwd(), fileName), data);
-// }
-// // TODO: Create a function to initialize app
-// function init() {
+function writeToFile(fileName, data) {
+  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
+// TODO: Create a function to initialize app
+function init() {
 
-//   inquirer.prompt(questions).then((responses) =>{
-//     console.log("Creating your README.md File");
-//     writeFile(".././Assets/readme.md", generateMarkdown({...responses}));
-//   });
-// }
+  inquirer.prompt(questions).then((responses) =>{
+    console.log("Creating your README.md File");
+    writeToFile(".././Assets/readme.md", generateMarkdown({...responses}));
+  });
+}
 
 // Function call to initialize app
 init();
