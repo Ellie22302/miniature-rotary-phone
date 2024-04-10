@@ -24,7 +24,7 @@ if(license === 'MIT') {
   }
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink() {
+function renderLicenseLink(license) {
     if(license === 'MIT') {
       licenseLink = 'https://opensource.org/licenses/MIT'
 } else if (license === 'Apache 2.0') {
@@ -44,33 +44,66 @@ function renderLicenseLink() {
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection() {
-if (license !== "none"){
-  return
+function renderLicenseSection(license) {
+
+let licenseSection = ''
+
+  if(licenseSection === 'None'){
+    licenseSection = ''
+  }else {
+    licenseSection = `license ${license}`
+  }
+
+  return licenseSection;
 }
-}
+
 // TODO: Create a function to generate markdown for README
 const input = require("inquirer/lib/prompts/input");
-function generateMarkdown(data) {
-  return `# ${input.title}
-  by ${input.name}
-  ${renderLicenseBadge(input.license)}
-  ${renderLicenseLink(input.license)}
-  ##Description
-  ${input.description}
-  ## Requirements
-  ${input.require}
-  ##Usage
-  ${input.usage}
-  ##Contact Me
-  * Name - ${input.name}
-  * Email - ${input.email}
-  * Github - [${input.creator}](https://github.com/${input.creator}/)
-  ## Contributors
-  ${input.contributors}
-  ##Testting
-  ${input.test}
-  ${renderLicenseSection(input.license)}
+function generateMarkdown(answer) {
+  return `# ${answer.title}
+
+## ${renderLicenseSection(answer.license)} ${renderLicenseBadge(answer.license)}
+### ${renderLicenseLink(answer.license)}
+
+## Table of Contents:
+###  * [Installation](#installation)
+###  * [Usage](#usage)
+###  * [License](#license)
+###  * [Contributors](#contributors)
+###  * [Tests](#tests)
+###  * [Questions](#questions)
+
+## Created by ${answer.name}
+### ${renderLicenseBadge(answer.license)}
+### ${renderLicenseLink(answer.license)}
+
+
+## Description
+### ${answer.description}
+
+
+## Requirements
+## These are the requirements 
+### ${answer.require}
+
+
+##Usage
+
+### ${answer.usage}
+
+
+## Contact Me
+### * Name - ${answer.name}
+### * Email - ${answer.email}
+### * Github - [${answer.github}](https://github.com/${answer.github}/)
+
+
+## Contributors
+### ${answer.contributors}
+
+
+##Testting
+### ${answer.test}
 `;
 }
 

@@ -60,7 +60,7 @@ const questions = [
 
 const writeToFile= fileContent =>{
 
-  fs.writeFile('./createdREADME.md',fileContent);
+  fs.writeFileSync('./createdREADME.md',fileContent);
 
 }
   
