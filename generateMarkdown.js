@@ -87,7 +87,7 @@ function generateMarkdown(answer) {
 ### ${answer.require}
 
 
-##Usage
+## Usage
 
 ### ${answer.usage}
 
@@ -102,8 +102,11 @@ function generateMarkdown(answer) {
 ### ${answer.contributors}
 
 
-##Testting
+## Testing
 ### ${answer.test}
+
+## Screenshots 
+### Add screenshots below
 `;
 }
 
