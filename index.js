@@ -14,10 +14,10 @@ const questions = [
     message:"Please Describe your Readme/Project",
   },
   {
-    type: "Checkbox",
+    type: "list",
     name:"license",
     message:"Please select the licence for your Readme/Project",
-    choices: ["MIT", "APACHE2.0", "Boost1.0", "MPL2.0", "BSD3", "none"],
+    choices: ["MIT", "APACHE2.0", "Boost1.0", "GPL v3.0", "BSD3", "none"],
   },
   {
     type: "input",
@@ -57,17 +57,26 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+
+const writeToFile= fileContent =>{
+
+  fs.writeFile('./createdREADME.md',fileContent);
+
 }
+  
+
 // TODO: Create a function to initialize app
 function init() {
 
-  inquirer.prompt(questions).then((responses) =>{
-    console.log("Creating your README.md File");
-    writeToFile(".././Assets/readme.md", generateMarkdown({...responses}));
+  inquirer.prompt(questions)
+      .then(function(answer){
+    console.log(answer);
+    var fileContent = generateMarkdown(answer);
+    writeToFile(fileContent);
   });
 }
 
 // Function call to initialize app
 init();
+
+module.exports = questions;
